@@ -48,9 +48,9 @@ module AlphabeticalPaginate
 
       element = params[:bootstrap3] ? 'ul' : 'div'
       if params[:pagination_class] != "none"
-        pagination = "<#{element} class='pagination %s alpha' style='height:35px;'>" % params[:pagination_class]
+        pagination = "<#{element} class='pagination %s alpha'>" % params[:pagination_class]
       else
-        pagination = "<#{element} class='pagination alpha' style='height:35px;'>"
+        pagination = "<#{element} class='pagination alpha'>"
       end
       pagination +=
         (params[:bootstrap3] ? "" : "<ul>") +
