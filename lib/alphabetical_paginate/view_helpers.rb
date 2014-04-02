@@ -6,7 +6,7 @@ module AlphabeticalPaginate
       links = ""
 
       output += javascript_include_tag 'alphabetical_paginate' if params[:js]
-      
+
       if params[:paginate_all]
         range = params[:language].letters_range
         if params[:others]
@@ -20,6 +20,7 @@ module AlphabeticalPaginate
         range.unshift "All" if params[:include_all]
         range.each do |l|
           value = params[:language].output_letter(l)
+          value = "#" if value == "0-9"
           if l == params[:currentField]
             links += '<li class="active"><a href="#" data-letter="' + l + '">' + value + "</a></li>"
           elsif params[:db_mode] or params[:availableLetters].include? l
@@ -34,7 +35,7 @@ module AlphabeticalPaginate
         params[:availableLetters].unshift "All" if params[:include_all]
         params[:availableLetters] -= (1..9).to_a.map{|x| x.to_s} if !params[:numbers]
         params[:availableLetters] -= ["*"] if !params[:others]
-        
+
         params[:availableLetters].each do |l|
           value = params[:language].output_letter(l)
           if l == params[:currentField]
@@ -44,7 +45,7 @@ module AlphabeticalPaginate
           end
         end
       end
-      
+
 
       element = params[:bootstrap3] ? 'ul' : 'div'
       if params[:pagination_class] != "none"
